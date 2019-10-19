@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ethereal</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/basic.js"></script>
+    <script src="js/calcs.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Rajdhani&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div id="header">
+    <img class="icon link" onclick="redirect()" src="images/logo.png" alt="Pulse Icon"/>
+    <div class="text link" onclick="redirect()">Puls3</div>
+</div>
+
+<div id="panel">
+    <div class="container">
+        <div class="text">Calculators</div>
+        <div class="description">A public resource provided by Puls3!</div>
+    </div>
+</div>
+
+<div id="content">
+    <div class="section calculator collapsed" calc="upboost">
+        <div class="header">
+            <div class="text">
+                Upgrade Point Boost Gold Cost Calculator
+            </div>
+        </div>
+        <div class="under">
+            <div class="calc-data">
+                <p>Calculates the cost to get from your current Upgrade Point Boost to your wanted Upgrade Point Boost.</p>
+                <p>Created by Puls3, last updated on February 21st of 2019.</p>
+            </div>
+            <div class="calc-inputs">
+                <input type="number" min="0" step="1" placeholder="Current Upgrade Point Boost Percent">
+                <input type="number" min="0" step="1" placeholder="Wanted Upgrade Point Boost Percent">
+                <button class="calculate" onclick="calculate(this)">Calculate</button>
+            </div>
+            <div class="calc-returns" style="display: none;">
+            </div>
+        </div>
+    </div>
+    <div class="section calculator collapsed" calc="classic">
+        <div class="header">
+            <div class="text">
+                Quest Boost Rhodium Cost Calculator
+            </div>
+        </div>
+        <div class="under">
+            <div class="calc-data">
+                <p>Calculates the cost to get from your current Quest Boost to your wanted Quest Boost.</p>
+                <p>Created by Puls3, last updated on February 17th of 2019.</p>
+            </div>
+            <div class="calc-inputs">
+                <input type="number" min="0" step="1" placeholder="Current Quest Boost Percent">
+                <input type="number" min="0" step="1" placeholder="Wanted Quest Boost Percent">
+                <button class="calculate" onclick="calculate(this)">Calculate</button>
+            </div>
+            <div class="calc-returns" style="display: none;">
+            </div>
+        </div>
+    </div>
+    <div class="section calculator collapsed" calc="classic">
+        <div class="header">
+            <div class="text">
+                Global Drop Boost Rhodium Cost Calculator
+            </div>
+        </div>
+        <div class="under">
+            <div class="calc-data">
+                <p>Calculates the cost to get from your current Global Drop Boost to your wanted Global Drop Boost.</p>
+                <p>Created by Puls3, last updated on February 17th of 2019.</p>
+            </div>
+            <div class="calc-inputs">
+                <input type="number" min="0" step="1" placeholder="Current Global Drop Boost Percent">
+                <input type="number" min="0" step="1" placeholder="Wanted Global Drop Boost Percent">
+                <button class="calculate" onclick="calculate(this)">Calculate</button>
+            </div>
+            <div class="calc-returns" style="display: none;">
+            </div>
+        </div>
+    </div>
+    <div class="section calculator collapsed" calc="classic">
+        <div class="header">
+            <div class="text">
+                Spare Part Boost Rhodium Cost Calculator
+            </div>
+        </div>
+        <div class="under">
+            <div class="calc-data">
+                <p>Calculates the cost to get from your current Spare Part Boost to your wanted Spare Part Boost.</p>
+                <p>Created by Puls3, last updated on February 17th of 2019.</p>
+            </div>
+            <div class="calc-inputs">
+                <input type="number" min="0" step="1" placeholder="Current Spare Part Boost Percent">
+                <input type="number" min="0" step="1" placeholder="Wanted Spare Part Boost Percent">
+                <button class="calculate" onclick="calculate(this)">Calculate</button>
+            </div>
+            <div class="calc-returns" style="display: none;">
+            </div>
+        </div>
+    </div>
+    <div class="section calculator collapsed" calc="expboost">
+        <div class="header">
+            <div class="text">
+                Global Experience Boost Rhodium Cost Calculator
+            </div>
+        </div>
+        <div class="under">
+            <div class="calc-data">
+                <p>Calculates the cost to get from your current Global Experience Boost to your wanted Global Experience Boost.</p>
+                <p>Created by Puls3, last updated on February 17th of 2019.</p>
+            </div>
+            <div class="calc-inputs">
+                <input type="number" min="0" step="1" placeholder="Current Global Experience Boost Percent">
+                <input type="number" min="0" step="1" placeholder="Wanted Global Experience Boost Percent">
+                <button class="calculate" onclick="calculate(this)">Calculate</button>
+            </div>
+            <div class="calc-returns" style="display: none;">
+            </div>
+        </div>
+    </div>
+    <div class="section calculator collapsed" calc="quint">
+        <div class="header">
+            <div class="text">
+                Quint Chance Spare Part Cost Calculator
+            </div>
+        </div>
+        <div class="under">
+            <div class="calc-data">
+                <p>Calculates the cost in Spare Parts to get from your current Quint Chance to your wanted Quint Chance.</p>
+                <p>Created by Puls3 & Karubo, last updated on September 5th of 2019.</p>
+            </div>
+            <div class="calc-inputs">
+                <input type="number" min="0" step="0.1" placeholder="Current Quint Chance Percent">
+                <input type="number" min="0.1" step="0.1" placeholder="Wanted Quint Chance Percent">
+                <input type="number" min="0" placeholder="Current Scrapyard Level">
+                <button class="calculate" onclick="calculate(this)">Calculate</button>
+            </div>
+            <div class="calc-returns" style="display: none;">
+            </div>
+        </div>
+    </div>
+    <div class="section calculator collapsed" calc="resourceBoost">
+        <div class="header">
+            <div class="text">
+                Resource Boost Spare Part Cost Calculator
+            </div>
+        </div>
+        <div class="under">
+            <div class="calc-data">
+                <p>Calculates the cost in Spare Parts to get from your current Resource Boost to your wanted Resource Boost.</p>
+                <p>Created by Puls3 & Karubo, last updated on September 5th of 2019.</p>
+            </div>
+            <div class="calc-inputs">
+                <input type="number" min="0" step="0.1" placeholder="Current Resource Boost Percent">
+                <input type="number" min="0.1" step="0.1" placeholder="Wanted Resource Boost Percent">
+                <input type="number" min="0" placeholder="Current Scrapyard Level">
+                <button class="calculate" onclick="calculate(this)">Calculate</button>
+            </div>
+            <div class="calc-returns" style="display: none;">
+            </div>
+        </div>
+    </div>
+    <div class="section calculator collapsed" calc="ingot">
+        <div class="header">
+            <div class="text">
+                Rhodium Ingot Drop Rate Calculator
+            </div>
+        </div>
+        <div class="under">
+            <div class="calc-data">
+                <p>Calculates how many actions on average it takes for one Rhodium Ingot to drop.</p>
+                <p>Created by Puls3, last updated on February 17th of 2019.</p>
+            </div>
+            <div class="calc-inputs">
+                <input type="number" min="0" step="1" placeholder="Global Drop Boost Percent">
+                <input type="number" min="0" step="1" placeholder="Guild Wishing Well Level">
+                <button class="calculate" onclick="calculate(this)">Calculate</button>
+            </div>
+            <div class="calc-returns" style="display: none;">
+            </div>
+        </div>
+    </div>
+    <div class="section final">
+        <div class="header">
+            <div class="text">
+                Do you like my calculators?
+            </div>
+            <div class="description">
+                Consider checking out some of my other cool creations; <a onclick="redirect()">Here!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="footer"></div>
+
+</body>
+</html>
