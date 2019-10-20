@@ -5,8 +5,8 @@ function calculate(elem) {
     let temp;
     for (let i = 0; i < $section.find(".calc-inputs > input").length; i++) {
         temp = prepare($section.find(".calc-inputs > input").eq(i).val());
-        if (isNumber(temp) && temp.replace(/\s/g, '').length) {
-            inputs.push(temp);
+        if (isNumber(Number(temp)) && temp.replace(/\s/g, '').length) {
+            inputs.push(Number(temp));
         } else {
             respond($section, "Inputs must be numbers!");
             return;
