@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Rajdhani&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet" type="text/css">
+    <link href="./css/calcs.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -105,6 +106,26 @@
             </div>
         </div>
     </div>
+    <div class="section calculator collapsed" calc="classic">
+        <div class="header">
+            <div class="text">
+                Stat Drop boost Rhodium Cost Calculator
+            </div>
+        </div>
+        <div class="under">
+            <div class="calc-data">
+                <p>Calculates the cost to get from your current Stat Drop boost to your wanted Stat Drop boost.</p>
+                <p>Created by Puls3, last updated on October 20th of 2019.</p>
+            </div>
+            <div class="calc-inputs">
+                <input type="number" min="0" step="1" placeholder="Current Stat Drop boost Percent">
+                <input type="number" min="0" step="1" placeholder="Wanted Stat Drop boost Percent">
+                <button class="calculate" onclick="calculate(this)">Calculate</button>
+            </div>
+            <div class="calc-returns" style="display: none;">
+            </div>
+        </div>
+    </div>
     <div class="section calculator collapsed" calc="expboost">
         <div class="header">
             <div class="text">
@@ -119,6 +140,26 @@
             <div class="calc-inputs">
                 <input type="number" min="0" step="1" placeholder="Current Global Experience Boost Percent">
                 <input type="number" min="0" step="1" placeholder="Wanted Global Experience Boost Percent">
+                <button class="calculate" onclick="calculate(this)">Calculate</button>
+            </div>
+            <div class="calc-returns" style="display: none;">
+            </div>
+        </div>
+    </div>
+    <div class="section calculator collapsed" calc="expboost">
+        <div class="header">
+            <div class="text">
+                Gold Boost Rhodium Cost Calculator
+            </div>
+        </div>
+        <div class="under">
+            <div class="calc-data">
+                <p>Calculates the cost to get from your current Gold Boost to your wanted Gold Boost.</p>
+                <p>Created by Puls3, last updated on October 20th of 2019.</p>
+            </div>
+            <div class="calc-inputs">
+                <input type="number" min="0" step="1" placeholder="Current Gold Boost Percent">
+                <input type="number" min="0" step="1" placeholder="Wanted Gold Boost Percent">
                 <button class="calculate" onclick="calculate(this)">Calculate</button>
             </div>
             <div class="calc-returns" style="display: none;">
