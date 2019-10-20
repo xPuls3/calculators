@@ -15,17 +15,53 @@ function calculate(elem) {
     respond($section, calcs[calc](...inputs));
 }
 
-function respond($section, i) {
-    if (Array.isArray(i)) {
-        for (let i = 0; i < i.length; i++) {
-            $section.find(".calc-returns").eq(i).text(i).show();
+function respond($section, a) {
+    $section.find(".calc-returns").hide();
+    if (Array.isArray(a)) {
+        for (let i = 0; i < a.length; i++) {
+            $section.find(".calc-returns").eq(i).text(a[i]).show();
         }
     } else {
-        $section.find(".calc-returns").text(i).show();
+        $section.find(".calc-returns").eq(0).text(a).show();
     }
 }
 
 calcs = {
+
+    housing: function(current, wanted) {
+        return calcs.guild(current, wanted, 1.63, [10000000, 150000, 7500])
+    },
+
+    tradingpost: function(current, wanted) {
+        return calcs.guild(current, wanted, 1.1, [11250000, 60000])
+    },
+
+    gym: function(current, wanted) {
+        return calcs.guild(current, wanted, 1.1, [7500000, 85000])
+    },
+
+    battle: function(current, wanted) {
+        return calcs.guild(current, wanted, 1.1, [4500000, 105000])
+    },
+
+    guild: function (current, wanted, mod, base) {
+        let result = [];
+        for (i = 0; i < base.length; i++) {
+            result.push(0);
+        }
+        while (current < wanted) {
+            for (i = 0; i < base.length; i++) {
+                result[i] += Math.round(Math.pow(mod, current) * base[i]);
+            }
+            current++;
+        }
+        result[0] = comma(result[0]) + " Gold Required";
+        result[1] = comma(result[1]) + " Of Each Resources Required";
+        if (result[2]) {
+            result[2] = comma(result[2]) + " Spare Parts Required";
+        }
+        return result;
+    },
 
     upboost: function (current, wanted) {
         let result = 0;

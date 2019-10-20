@@ -28,7 +28,7 @@ function isNumber(n) {
 }
 
 function prepare(n) {
-    n = String(n)
+    n = String(n);
     n = n.replace(/,/g,'');
     n = n.replace(/%/g,'');
     return n
