@@ -123,6 +123,25 @@ calcs = {
         return comma(result) + " Spare Parts Required";
     },
 
+    slot: function (current, wanted){
+        let result = [0, 0, 0];
+        for (let i = 1; i <= (wanted - current); i++){
+            result[0] += Math.round(21000 * Math.pow(1.041, (current + i)));
+            result[1] += Math.round(175 * Math.pow(1.041, (current + i)));
+            if((current + i) > 300){
+                result[2] += (current + i) - 300;
+            }
+        }
+        result[0] = comma(result[0]) + " Gold Required";
+        result[1] = comma(result[1]) + " Of Each Resources Required";
+        if (result[2] === 0) {
+            result.pop();
+        } else {
+            result[2] = comma(result[2]) + " Golden Cogs Required";
+        }
+        return result;
+    }
+
 };
 
 karuboFuncs = {
