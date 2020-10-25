@@ -1,4 +1,4 @@
-function calculate(elem) {
+function calculate (elem) {
     let $section = $(elem).parent().parent().parent();
     let calc = $section.attr("calc");
     let inputs = [];
@@ -15,7 +15,7 @@ function calculate(elem) {
     respond($section, calcs[calc](...inputs));
 }
 
-function respond($section, a) {
+function respond ($section, a) {
     $section.find(".calc-returns").hide();
     if (Array.isArray(a)) {
         for (let i = 0; i < a.length; i++) {
@@ -28,20 +28,20 @@ function respond($section, a) {
 
 calcs = {
 
-    housing: function(current, wanted) {
-        return calcs.guild(current, wanted, 1.63, [10000000, 150000, 7500])
+    housing: function (current, wanted) {
+        return calcs.guild(current, wanted, 1.63, [10000000, 150000, 7500]);
     },
 
-    tradingpost: function(current, wanted) {
-        return calcs.guild(current, wanted, 1.1, [11250000, 60000])
+    tradingpost: function (current, wanted) {
+        return calcs.guild(current, wanted, 1.1, [11250000, 60000]);
     },
 
-    gym: function(current, wanted) {
-        return calcs.guild(current, wanted, 1.1, [7500000, 85000])
+    gym: function (current, wanted) {
+        return calcs.guild(current, wanted, 1.1, [7500000, 85000]);
     },
 
-    battle: function(current, wanted) {
-        return calcs.guild(current, wanted, 1.1, [4500000, 105000])
+    battle: function (current, wanted) {
+        return calcs.guild(current, wanted, 1.1, [4500000, 105000]);
     },
 
     guild: function (current, wanted, mod, base) {
@@ -71,8 +71,8 @@ calcs = {
             return "Error! Inputs must be multiples of 5!";
         }
         while (current < wanted) {
-            result += 50000000*current;
-            if (result < 0) { result = 0 }
+            result += 50000000 * current;
+            if (result < 0) { result = 0; }
             result += 50000000;
             current++;
         }
@@ -123,12 +123,13 @@ calcs = {
         return comma(result) + " Spare Parts Required";
     },
 
-    slot: function (current, wanted){
+    // Old and unused (possibly incorrect)
+    oldSlot: function (current, wanted) {
         let result = [0, 0, 0];
-        for (let i = 1; i <= (wanted - current); i++){
+        for (let i = 1; i <= (wanted - current); i++) {
             result[0] += Math.round(21000 * Math.pow(1.041, (current + i)));
             result[1] += Math.round(175 * Math.pow(1.041, (current + i)));
-            if((current + i) > 300){
+            if ((current + i) > 300) {
                 result[2] += (current + i) - 300;
             }
         }
@@ -140,18 +141,69 @@ calcs = {
             result[2] = comma(result[2]) + " Golden Cogs Required";
         }
         return result;
+    },
+
+    slot: function (current, wanted) {
+
+        let currentUpgrades = current;
+        let upgradeAmount = wanted - current;
+        let upgradesTotal = currentUpgrades + upgradeAmount;
+
+        let exponent = 1.041;
+
+        let baseResCost = 175;
+        let baseGoldCost = 21000;
+
+        let resCost = mariaFuncs.calculatePowerSum(baseResCost, currentUpgrades, upgradesTotal, exponent);
+        let goldCost = mariaFuncs.calculatePowerSum(baseGoldCost, currentUpgrades, upgradesTotal, exponent);
+
+        let goldenCogCost = 0;
+
+        if (upgradesTotal > 300) {
+            goldenCogCost = mariaFuncs.calculateLinearSum(upgradesTotal - 300, 1) - mariaFuncs.calculateLinearSum(Math.max(0, currentUpgrades - 300), 1);
+        }
+
+        let result = [comma(goldCost) + " Gold Required", comma(resCost) + " Of Each Resources Required"];
+
+        if (goldenCogCost !== 0) {
+            result.push(comma(goldenCogCost) + " Golden Cogs Required");
+        }
+
+        return result;
+
     }
 
 };
 
-karuboFuncs = {
+// Less dumb (still dumb) Puls3 code ^
 
-    doTheThingQuint: function(current, wanted, scrapyard) {
-        return Math.round(((karuboFuncs.spBaseCost(current+wanted,15)+karuboFuncs.spCostGrowthModifierSum(current+wanted,"Quint"))-(karuboFuncs.spBaseCost(current,15)+karuboFuncs.spCostGrowthModifierSum(current,"Quint")))*scrapyard);
+// Dumb maria code
+mariaFuncs = {
+
+    calculatePowerSum: function (baseCost, currentLevel, maxLevel, exponent) {
+        let costMax = baseCost * (1 - Math.pow(exponent, maxLevel) / (1 - exponent)) - baseCost;
+        let costCurrent = baseCost * (1 - Math.pow(exponent, currentLevel) / (1 - exponent)) - baseCost;
+
+        let upgradeCost = Math.round(costMax - costCurrent);
+
+        return upgradeCost;
     },
 
-    doTheThingResBoost: function(current, wanted, scrapyard) {
-        return Math.round(((karuboFuncs.spBaseCost(current+wanted,8)+karuboFuncs.spCostGrowthModifierSum(current+wanted,""))-(karuboFuncs.spBaseCost(current,8)+karuboFuncs.spCostGrowthModifierSum(current,"")))*scrapyard);
+    calculateLinearSum: function (level, costPerLevel) {
+        return (level * (level + 1) / 2) * costPerLevel;
+    }
+
+};
+
+// Dumb Karubo code
+karuboFuncs = {
+
+    doTheThingQuint: function (current, wanted, scrapyard) {
+        return Math.round(((karuboFuncs.spBaseCost(current + wanted, 15) + karuboFuncs.spCostGrowthModifierSum(current + wanted, "Quint")) - (karuboFuncs.spBaseCost(current, 15) + karuboFuncs.spCostGrowthModifierSum(current, "Quint"))) * scrapyard);
+    },
+
+    doTheThingResBoost: function (current, wanted, scrapyard) {
+        return Math.round(((karuboFuncs.spBaseCost(current + wanted, 8) + karuboFuncs.spCostGrowthModifierSum(current + wanted, "")) - (karuboFuncs.spBaseCost(current, 8) + karuboFuncs.spCostGrowthModifierSum(current, ""))) * scrapyard);
     },
 
     spCostGrowthModifierSum: function (amount, type) {
@@ -178,6 +230,6 @@ karuboFuncs = {
 
     spBaseCost: function (level, costPerLevel) {
         return (level * (level + 1) / 2) * costPerLevel;
-    },
+    }
 
 };
